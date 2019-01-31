@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace SalesWebMvc.Models
@@ -22,9 +23,24 @@ namespace SalesWebMvc.Models
         }
 
         public int Id { get; set; }
+
+        [Required]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "Tamanho do nome deve ser entre 3 e 60")]
         public string Name { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Birth Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
+
+        [Required]
+        [Display(Name = "Base Salary")]
+        [DisplayFormat(DataFormatString ="{0:F2}")]
         public double BaseSalary { get; set; }
             
         public Department Department { get; set; }
