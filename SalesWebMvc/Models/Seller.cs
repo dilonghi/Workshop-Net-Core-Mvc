@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SalesWebMvc.Models.ValueObject;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace SalesWebMvc.Models
 
         }
 
-        public Seller(int id, string name, string email, DateTime birthDate, double baseSalary, Department department)
+        public Seller(int id, Name name, Email email, DateTime birthDate, double baseSalary, Department department)
         {
             Id = id;
             Name = name;
@@ -26,11 +27,11 @@ namespace SalesWebMvc.Models
 
         [Required]
         [StringLength(60, MinimumLength = 3, ErrorMessage = "Tamanho do nome deve ser entre 3 e 60")]
-        public string Name { get; set; }
+        public Name Name { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        public Email Email { get; set; }
 
         [Required]
         [Display(Name = "Birth Date")]

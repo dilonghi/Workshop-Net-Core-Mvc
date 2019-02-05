@@ -74,7 +74,7 @@ namespace SalesWebMvc.Controllers
             var departmants = await _departmentService.FindAllAsync();
 
             SellerFormViewModel viewModel = new SellerFormViewModel { Seller = obj, Departments = departmants };
-            
+
 
             return View(viewModel);
 
@@ -91,11 +91,11 @@ namespace SalesWebMvc.Controllers
             {
                 await _sellerService.UpdateAsync(seller);
             }
-            catch (ApplicationException e )
+            catch (ApplicationException e)
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            
+
 
             return RedirectToAction("Index");
 
@@ -118,13 +118,19 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Remove(Seller seller)
         {
-            await _sellerService.RemoveAsync(seller.Id);
-
-            return RedirectToAction("Index");
+            try
+            {
+                await _sellerService.RemoveAsync(seller.Id);
+                return RedirectToAction("Index");
+            }
+            catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
 
         }
 
-        public  IActionResult Error(string message)
+        public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel
             {
@@ -133,7 +139,7 @@ namespace SalesWebMvc.Controllers
             };
 
             return View(viewModel);
-            
+
         }
     }
 }

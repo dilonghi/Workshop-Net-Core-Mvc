@@ -25,8 +25,8 @@
             foreach (var seller in Model)
             {
         <tr>
-            <td>@Html.DisplayFor(m => seller.Name)</td>
-            <td>@Html.DisplayFor(m => seller.Email)</td>
+            <td>@Html.DisplayFor(m => seller.Name.FirstName) @Html.DisplayFor(m => seller.Name.LastName)</td>
+            <td>@Html.DisplayFor(m => seller.Email.Address)</td>
             <td>@Html.DisplayFor(m => seller.BirthDate)</td>
             <td>@Html.DisplayFor(m => seller.BaseSalary)</td>
             <td>
